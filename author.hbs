@@ -3,7 +3,6 @@
 <div class="content-area">
     <main class="site-main container">
         {{#author}}
-            <section class="term">
                 {{#if profile_image}}
                     <div class="author-image-placeholder u-placeholder">
                         <img class="author-image lazyload u-object-fit"
@@ -12,6 +11,7 @@
                         alt="{{name}}">
                     </div>
                 {{/if}}
+            <section class="term">
                 <h1 class="term-name">{{name}}</h1>
             </section>
         {{/author}}
