@@ -1,25 +1,36 @@
-<footer class="site-footer">
-    <div class="copyright">
-        Made with ❤️ by <a href="https://heribertodelgado.web.app/" target="_blank">Heriberto Delgado</a>
-    </div>
-    {{> logo}}
-    <div class="footer-social">
-        {{#if @site.facebook}}
-            <a class="footer-social-item" href="{{facebook_url @site.facebook}}"
-                target="_blank" rel="noopener noreferrer">
-                <i class="icon icon-facebook"></i>
-            </a>
-        {{/if}}
-        {{#if @site.twitter}}
-            <a class="footer-social-item" href="{{twitter_url @site.twitter}}"
-                target="_blank" rel="noopener noreferrer">
-                <i class="icon icon-twitter"></i>
-            </a>
-        {{/if}}
-        <a class="footer-social-item footer-social-item-rss"
-            href="https://feedly.com/i/subscription/feed/{{@site.url}}/rss/"
-            target="_blank" rel="noopener noreferrer">
-            <i class="icon icon-rss"></i>
+{{!--
+This footer template is shared across all the pages.
+--}}
+
+<footer class="m-footer">
+  <div class="m-footer__content">
+    {{#if @site.secondary_navigation}}
+      <nav class="m-footer__nav-secondary" role="navigation" aria-label="{{t "Secondary menu in footer"}}">
+        {{navigation type="secondary"}}
+      </nav>
+    {{/if}}
+    <nav class="m-footer-social">
+      {{#if @site.facebook}}
+        <a href="{{facebook_url @site.facebook}}" target="_blank" rel="noopener" aria-label="Facebook">
+          <span class="icon-facebook" aria-hidden="true"></span>
         </a>
-    </div>
+      {{/if}}
+      {{#if @site.twitter}}
+        <a href="{{twitter_url @site.twitter}}" target="_blank" rel="noopener" aria-label="Twitter">
+          <span class="icon-twitter" aria-hidden="true"></span>
+        </a>
+      {{/if}}
+      <a href="{{@site.url}}/rss" aria-label="RSS">
+        <span class="icon-rss" aria-hidden="true"></span>
+      </a>
+    </nav>
+    <p class="m-footer-copyright">
+      <span>{{@site.title}} &copy; {{date format="YYYY"}}</span>
+      <span>&nbsp; &bull; &nbsp;</span>
+      <span>{{t "Published by"}} <a href="https://heribertodelgado.web.app/" target="_blank" rel="noopener">Heriberto Delgado</a></span>
+    </p>
+    <p class="m-footer-copyright jslicense">
+      <a href="{{asset "html/javascript.html"}}" rel="jslicense">{{t "JavaScript license information"}}</a>
+    </p>
+  </div>
 </footer>
