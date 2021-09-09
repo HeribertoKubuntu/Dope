@@ -26,6 +26,14 @@ into the {body} of the default.hbs template --}}
   {{#post}}
     {{!-- Inject styles of the hero image to make it responsive --}}
     {{> hero background=feature_image}}
+    <div class="m-hero__content" data-aos="fade-down">
+    <h1 class="m-hero-title-post bigger">{{title}}</h1>
+  </div>
+  <div class="m-featured-article__timestamp">
+                            <span>{{date published_at timeago="true"}}</span>
+                            <span>&bull;</span>
+                            <span>{{reading_time minute=(t "1 min read") minutes=(t "% min read")}}</span>
+                          </div>
     </section>
   {{/post}}
   
@@ -40,11 +48,11 @@ into the {body} of the default.hbs template --}}
             <header class="m-heading">
               <h1 class="m-heading__title in-post">{{title}}</h1>
               <div class="m-heading__meta">
-                {{#if primary_tag}}
-                  <a href="{{primary_tag.url}}" class="m-heading__meta__tag">{{primary_tag.name}}</a>
-                  <span class="m-heading__meta__divider" aria-hidden="true">&bull;</span>
-                {{/if}}
                 <span class="m-heading__meta__time">{{date published_at}}</span>
+                <span class="m-heading__meta__divider" aria-hidden="true">&bull;</span>
+                <a href="{{primary_author.url}}" class="m-heading__meta__tag">
+                  {{primary_author.name}}
+                </a>
               </div>
             </header>
             <div class="pos-relative js-post-content">
@@ -83,8 +91,28 @@ into the {body} of the default.hbs template --}}
             </div>
           </div>
         </div>
+        {{!-- If you want to embed comments, this is a good place to do it! --}}
+          <section class="m-comments">
+            <div class="m-load-comments__iframe l-wrapper in-comments js-comments-iframe">
+              <div
+               id="disqus_thread"></div>
+              <script>
+                var disqus_config = function () {
+                  this.page.url = "{{url absolute="true"}}";
+                  this.page.identifier = "ghost-{{comment_id}}"
+                };
+                (function () {
+                  var d = document, s = d.createElement('script');
+                  s.src = 'https://blogofhery.disqus.com/embed.js';
+                  s.setAttribute('data-timestamp', +new Date());
+                  (d.head || d.body).appendChild(s);
+                })();
+              </script>
+            </div>
+          </section>
         {{!-- Email subscribe form at the bottom of the page --}}
-        <section class="m-subscribe-section js-newsletter">
+         
+        {{!-- <section class="m-subscribe-section js-newsletter">
           <div class="l-wrapper in-post">
             <div class="m-subscribe-section__content">
               <div class="m-subscribe-section__text">
@@ -98,7 +126,8 @@ into the {body} of the default.hbs template --}}
               </div>
             </div>
           </div>
-        </section>
+        </section> --}}
+
         <section class="m-author">
           <div class="m-author__content">
             <div class="m-author__picture">
@@ -126,7 +155,7 @@ into the {body} of the default.hbs template --}}
                 {{#if primary_author.website}}
                   <li>
                     <a href="{{primary_author.website}}" target="_blank" rel="noopener" aria-label="{{t "Website"}}">
-                      <span class="icon-globe" aria-hidden="true"></span>
+                      <i class="fas fa-globe-americas"></i>
                     </a>
                   </li>
                 {{/if}}
@@ -148,26 +177,6 @@ into the {body} of the default.hbs template --}}
             </div>
           </div>
         </section>
-        {{!-- If you want to embed comments, this is a good place to do it! --}}
-        {{!--
-          <section class="m-comments">
-            <div class="m-load-comments__iframe l-wrapper in-comments js-comments-iframe">
-              <div id="disqus_thread"></div>
-              <script>
-                var disqus_config = function () {
-                  this.page.url = "{{url absolute="true"}}";
-                  this.page.identifier = "ghost-{{comment_id}}"
-                };
-                (function () {
-                  var d = document, s = d.createElement('script');
-                  s.src = 'https://CHANGETHIS.disqus.com/embed.js';
-                  s.setAttribute('data-timestamp', +new Date());
-                  (d.head || d.body).appendChild(s);
-                })();
-              </script>
-            </div>
-          </section>
-        --}}
       {{/post}}
       {{!-- Related posts --}}
       {{#if post.tags.length}}

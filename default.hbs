@@ -19,6 +19,9 @@
     <link rel="preconnect" href="https://polyfill.io">
     <link rel="dns-prefetch" href="https://polyfill.io">
 
+    {{!-- Fontawesome --}}
+    <script src="https://kit.fontawesome.com/ee94b26fbe.js" crossorigin="anonymous"></script>
+
     {{!-- This #block helper will try to preload page-specific assets --}}
     {{{block "preload"}}}
 
@@ -71,6 +74,17 @@
         url("{{asset 'fonts/icomoon/icomoon.woff?101fc3'}}") format('woff'),
         url("{{asset 'fonts/icomoon/icomoon.svg?101fc3#icomoon'}}") format('svg');
       }
+
+      /* Madsense */
+      @font-face {
+        font-family: 'MADSENSE';
+        font-style: normal;
+        font-weight: normal;
+        font-display: swap;
+        src: local('Madsense-Regular'),
+            url("{{asset 'fonts/Madsense/MADSENSE.woff2'}}") format('woff2'),
+            url("{{asset 'fonts/Madsense/MADSENSE.woff2'}}") format('woff');
+      }
     </style>
 
     <link rel="stylesheet" type="text/css" href="{{asset "css/app.css"}}" media="screen" />
@@ -111,6 +125,7 @@
     <script defer src="{{asset "js/vendor/content-api.min.js"}}"></script>
     <script defer src="{{asset "js/vendor.js"}}"></script>
     <script defer src="{{asset "js/app.js"}}"></script>
+    <script id="dsq-count-scr" src="//blogofhery.disqus.com/count.js" async></script>
 
     {{!-- The #block helper will pull in data from the #contentFor other template files --}}
     {{{block "scripts"}}}
